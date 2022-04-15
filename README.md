@@ -1,2 +1,2 @@
-# TechDegree Github Setup
+# Techdegree Githup Project Setup
  
