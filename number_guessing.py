@@ -5,14 +5,13 @@ from statistics import mean, median, mode
 
 min_number = 1
 max_number = 10
+scores = []
 
-all_scores = []
 
 def start_game(score_list):
     print("Can you guess a number between 1 and 10?")
     number_of_guesses = 5
     score = 0
-    score_list = []
     random_number = random.randint(min_number, max_number)
     while number_of_guesses > 0:
         user_guess = input(">  ")
@@ -35,12 +34,13 @@ def start_game(score_list):
                 print("That number is too low. Try again! You have " + str(number_of_guesses) + " guesses left")
                 score_list.append(score)
             else:
-                print("You guessed correctly! Congratulations! You had " + str(number_of_guesses) + " guesses left")      
+                score += 1
+                print("You guessed correctly! Congratulations! You had " + str(number_of_guesses) + " guesses left")
+                score_list.append(score)
                 play_again = ""
                 while play_again.lower() != "y" and play_again.lower() != "n":
                     play_again = input("Would you like to play again Y/N?  ")
-                if play_again.lower() == "n":
-                    score_list.append(score)
+                if play_again.lower() == "n":                    
                     print("Game Over. Thanks for playing!")
                     score_list = sorted(score_list)
                     mean_score = mean(score_list)
@@ -51,10 +51,11 @@ def start_game(score_list):
                     print(f"Mode Score: {mode_score}")
                     exit()
                 else:
-                    start_game(all_scores)
+                    start_game(score_list)
                     score_list.append(score)
     else:
         print("Sorry, you are out of guesses. Please try again!")
+        score_list.append(score)
         play_again = ""
         while play_again.lower() != "y" and play_again.lower() != "n":
             play_again = input("Would you like to play again Y/N?  ")
@@ -69,9 +70,9 @@ def start_game(score_list):
             mode_score = mode(score_list)
             print(f"Mode Score: {mode_score}")
         else:
-            start_game(all_scores.append(score_list))   
+            start_game(score_list)   
                        
 
 print("Hello! Welcome to the number guessing game.")    
-start_game(all_scores)    
+start_game(scores)      
               
